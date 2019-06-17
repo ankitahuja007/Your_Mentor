@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="style3.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+        <header role="banner">
+            <% inDash.forEach(function(item,index){ %>
+              <h1>Welcome, <%=item.name%></h1><br>
+          <% }) %>
+                
+                <ul class="utilities">
+                  <br>
+                  <!--<li class="users"><a href="#">My Account</a></li>-->
+                  <li class="logout warn"><a href="/user.html">Log Out</a></li>
+                </ul>
+              </header>
+              
+              <nav role='navigation'>
+                <ul class="main">
+                  <li class="women"><a href="#">WOMEN ISSUES</a></li>
+                  <li class="depression"><a href="#">DEPRESSION</a></li>
+                  <li class="health"><a href="#">HEALTH ISSUES</a></li>
+                  <li class="sexual"><a href="#">SEXUALY ABUSED</a></li>
+                  <li class="drug"><a href="#">DRUG ADDICTION</a></li>
+                </ul>
+              </nav>
+              
+              <main role="main">  
+                <!-- <section class="panel important">
+                  <h2>Write Some News</h2>
+                  <ul>
+                    <li>Information Panel</li>
+                  </ul>
+                </section>
+            -->
+                <section class="panel important">
+                  <h2>Write a Post</h2>
+                    <!-- <form> -->
+                      <div class="twothirds">
+                        Issue title:<br/>         
+                        <select id="Issue" size="00">
+                            
+                                <option type="text">--select issues--</option>
+                                <option type="text">WOMEN ISSUES</option>
+                            <option type="text">DEPRESSION</option>
+                            <option type="text">HEALTH ISSUES</option>
+                            <option type="text">SEXUALY ABUSED</option>
+                            <option type="text">DRUG ADDICTION</option>
+
+                        </select><br/><br/>
+                        
+                        Description:<br/>    
+                        <textarea id="Description" rows="15" cols="67"></textarea><br/>  
+                      
+                      <div>
+                        <!-- <button type="submit" class="btn btn-primary btn-lg" style ="background-color: blue ; margin-top:20px ;" onclick="addproblem()" >Submit</button> </div> -->
+                        <button class="btn btn-primary btn-lg" style ="background-color: blue ; margin-top:20px ;" onclick="addproblem()">post</button>
+                      </div>
+                
+                    <!-- </form> -->
+                </section>
+              
+              </main>
+
+</body>
+<script>
+
+  
+    
+    function addproblem(){
+      console.log(localStorage.getItem('email'))
+      console.log(document.getElementById('Issue').value)
+         axios({
+          method:'put',
+          url:'http://localhost:3007/query',
+          data:{
+            email:localStorage.getItem("email"),
+            Issue:document.getElementById("Issue").value,
+            Description:document.getElementById('Description').value
+          }
+        })
+        .then(res=>{
+        console.log(res)
+          })
+        
+        .catch(res=>{console.log("errorrr")})
+        
+
+    }
+
+
+</script>
+
+</html>
